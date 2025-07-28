@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+</head>
+<body>
+<h1 th:text="${title}"></h1>
+    <p>Comenzamos el primer proyecto con un "Hola Mundo" básico.</p>
+    <p>Mi nombre es 
+        <span th:text="${name}"></span>
+        , y mi apellido resulta ser
+        <span th:text="${lastname}"></span>
+        , y la fecha de hoy me parece que es algo como 
+        <span th:text="${date}"></span>
+    </p>
+</body>
+</html>
