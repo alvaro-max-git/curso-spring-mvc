@@ -8,12 +8,11 @@
 <body>
 <h1 th:text="${title}"></h1>
     <p>Comenzamos el primer proyecto con un "Hola Mundo" básico.</p>
-    <p>Mi nombre es 
-        <span th:text="${name}"></span>
-        , y mi apellido resulta ser
-        <span th:text="${lastname}"></span>
-        , y la fecha de hoy me parece que es algo como 
-        <span th:text="${date}"></span>
-    </p>
+    <ul><b>Datos del usuario</b> 
+        <li>Nombre: <span th:text="${name}"></span></li>
+        <li>Apellido: <span th:text="${lastname}"></span></li>
+        <li th:if="${email}">Email: <span th:text="${email}"></span></li>
+    </ul>
+    <p>A fecha de <span th:text="${date}"></span></p>
 </body>
 </html>
