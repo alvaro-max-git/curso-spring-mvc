@@ -2,8 +2,11 @@ package com.max.springboot.di.app.springboot_di.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.max.springboot.di.app.springboot_di.models.Product;
@@ -17,11 +20,13 @@ public class ProductServiceImpl implements ProductService{
     //trabaja con los datos.
     //también podríamos comunicarnos con una API externa
 
-    
+    @Autowired
+    private Environment environment;
+
     private ProductRepository repository;
 
     
-    public ProductServiceImpl(@Qualifier("productList") ProductRepository repository) {
+    public ProductServiceImpl(@Qualifier("productRepositoryJson") ProductRepository repository) {
         this.repository = repository;
     }
 
@@ -32,7 +37,8 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Product> findAll() {
         return repository.findAll().stream().map(p -> {
-            Double priceTaxed = p.getPrice()*1.25;
+            Double tax = environment.getProperty("config.price.tax", Double.class);
+            Double priceTaxed = p.getPrice()*tax;
             //Product newProd = new Product(p.getId(), p.getName(), priceTaxed.longValue());
             Product newProd = (Product)p.clone();
             newProd.setPrice(priceTaxed.longValue());
